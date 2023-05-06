@@ -1,0 +1,22 @@
+[
+  {
+      "month": "Jan",
+      "rev": 1000,
+      "prof":300
+  },
+  {
+      "month":"Feb",
+      "rev": 1200,
+      "prof":200
+  },
+  {
+      "month":"Mar",
+      "rev": 1300,
+      "prof":220
+  },
+  {
+      "month":"Apr",
+      "rev": 1400,
+      "prof":320
+  }
+]

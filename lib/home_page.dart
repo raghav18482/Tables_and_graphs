@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_responsive_tabs/tabs/barchart.dart';
 import 'package:flutter_responsive_tabs/tabs/first_tab.dart';
 import 'package:flutter_responsive_tabs/tabs/second_tab.dart';
+import 'package:flutter_responsive_tabs/tabs/table.dart';
 import 'package:flutter_responsive_tabs/tabs/third_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,63 +20,70 @@ class _HomePageState extends State<HomePage> {
       ),
       body: isTab(context)
           ? Container(
-              margin: EdgeInsets.only(left: 4, right: 4, top: 8),
-              child: Row(
+        margin: EdgeInsets.only(left: 4, right: 4, top: 8),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Card(
-                          margin: EdgeInsets.symmetric(horizontal: 8),
-                          child: Tab(
-                            text: "FIRST",
-                          ),
-                        ),
-                        Expanded(child: FirstTab()),
-                      ],
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: Tab(
+                      child: Text("Monthly Profit",
+                        style: TextStyle(color: Colors.black),
+                      )
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Card(
-                          margin: EdgeInsets.symmetric(horizontal: 8),
-                          child: Tab(
-                            text: "SECOND",
-                          ),
-                        ),
-                        Expanded(child: SecondTab()),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Card(
-                          margin: EdgeInsets.symmetric(horizontal: 8),
-                          child: Tab(
-                            text: "THIRD",
-                          ),
-                        ),
-                        Expanded(child: ThirdTab()),
-                      ],
-                    ),
-                  ),
+                  Expanded(child: FirstTab()),
                 ],
               ),
-            )
-          : DefaultTabController(
-              length: 3,
+            ),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: Tab(
+                      child: Text("Table",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  Expanded(child: table()),
+                ],
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: Tab(
+                      child: Text("Monthly Revenue",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  barchart(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      )
+          : DefaultTabController(
+            length: 3,
+                child: Column(
                 children: [
                   SizedBox(
                     height: 8,
@@ -93,29 +103,36 @@ class _HomePageState extends State<HomePage> {
                       indicatorWeight: 4,
                       tabs: [
                         Tab(
-                          text: "FIRST",
+                          child: Text("Monthly Profit",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                         Tab(
-                          text: "SECOND",
+                          child: Text("Table",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                         Tab(
-                          text: "THIRD",
+                          child: Text("Monthly Revenue",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         )
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        FirstTab(),
-                        SecondTab(),
-                        ThirdTab(),
-                      ],
-                    ),
+                 Expanded(
+                  child: TabBarView(
+                    children: [
+                      FirstTab(),
+                      table(),
+                      barchart(),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
+              ],
+          ),
+        ),
+
     );
   }
 
